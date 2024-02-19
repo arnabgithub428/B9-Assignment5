@@ -11,63 +11,55 @@ for (let index = 0; index < seats.length; index++){
         const seatnumber = key.innerText
         console.log(seatnumber);
 
+        
+        let ticketSpen = document.getElementById('seatLeft');
+        let totalticket = 40;
+         if (totalticket > 0){
+            totalticket--;
+            ticketSpen.textContent = totalticket;
+         }
+
+
+         const seatcounting = document.getElementById('seatcount');
+         let seatcount = 0;
+          if (seatcount < 40){
+            seatcount++;
+             seatcounting.textContent = seatcount;
+          }
 
         const handlerStatus = document.getElementById('seat-table');
         handlerStatus.innerText = seatnumber;
 
-        const pricehandlerStatus = document.getElementById('seat-price', 'totalprice');
-        pricehandlerStatus.innerText = '550';
+        const pricehandlerStatus = document.getElementById('seat-price');
+        pricehandlerStatus.innerText = 550;
 
         const totalprices = document.getElementById('totalprice');
         totalprices.innerText = '550';
 
-        const seatcounting = document.getElementById('seatcount');
-        
-        for (let i = 0; i <= index.length; i++){
-            const seatno = seatcounting[i];
-            const seatcountNO = seatno.innerText
-            console.log(seatcountNO);
-        }
-
+        const grandTotalCount = document.getElementById('grandTotal');
+        const total = 500;
+        grandTotalCount.textContent = total;
 
         const btn = document.querySelector('.seat');
 
-        btn.addEventListener('click', function onClick() {
-          btn.style.backgroundColor = 'salmon';
-          btn.style.color = 'activeButton';
+        btn.addEventListener("click", function onClick() {
+          btn.style.backgroundColor = '#1DD100';
+          btn.style.color = '#F7F8F8';
         });
 
-        // const table = document.getElementById('seat-table');
-        // const tbody = table.querySelector('tbody');
 
-        // const newRow = tbody.insertRow();
+        const seatnum = key.querySelector("seat-table").innerText;
+        const pricenum = key.querySelector("seat-price").innerText;
 
+        const titleContainer = document.getElementById("table-container");
+        const td = document.createElement("td");
+        td.innerText = seatnum;
 
-        // const seatCell = newRow.insertCell(0);
-        // const classCell = newRow.insertCell(1);
-        // const priceCell = newRow.insertCell(2);
-
-        // seatCell.textContent = seatnumber;
-        // classCell.textContent = 'Economoy';
-        // priceCell.textContent = 550 ;
-
-        // const container = document.getElementById('table-container');
-        // console.log(container);
-        // container.innerText = '';
-        // container.appendChild(tbody);
+        titleContainer.appendChild(td);
     });
 }
 
 
-
-// function addBackgroundColorById(elementId){
-//   const element = document.getElementById(elementId);
-//   element.addEventListener('click',function(){
-//     element.classList.add('activeButton');
-//   });
-// }
-// const elementId = 'A1';
-// addBackgroundColorById(elementId);
 
 function nextbtn(){
     // const homeSection = document.getElementById('homeScreen');
