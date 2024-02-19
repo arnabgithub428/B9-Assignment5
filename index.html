@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P Ticket</title>
+    <link rel="stylesheet" href="style.css">
     <!-- tailwind and daisyUI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,6 +30,12 @@
         }
     </style>
 
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+    </style>
+
     <!-- custom styles -->
 
     <script>
@@ -39,6 +46,7 @@
                 buttons: '#F7F8F8',
                 activeButton: '#1DD100',
                 cupnbgd: '#FFF',
+                SUCCESS: '#27AE60',
               }
             }
           }
@@ -76,15 +84,15 @@
             </div>
           </div>
     </header>
-    <main class="md:container md:mx-auto">
-
+    <main id="homeScreen" class="md:container md:mx-auto relative">
+        <section>
         <div class=" lg:relative ld:-h-4 card md:px-4 lg:w-full lg:px-7 lg:mt-14 image-full items-center">
             <figure><img class="w-full" src="images/banner.png" /></figure>
             <div class="text-center">
                 <h1 class=" md:text-2xl lg:text-7xl text-white font-bold">End-to-End Travel with </h1>
-                <h1  class="md:text-2xl lg:text-7xl text-red-400 font-bold lg:mt-7">P Paribahan</h1>
+                <h1 class="md:text-2xl lg:text-7xl text-red-400 font-bold lg:mt-7">P Paribahan</h1>
                 <p class="md:text-xs lg:mt-7 text-white">Yes, you can run unit tests and view the results directly within the app. The<br>integrated testing features allow for a streamlined .</p>
-                <button class="btn btn-error mt-8 bg-activeButton border-0 text-white w-40 font-semibold lg:text-xl">Buy Tickets</button>
+                <button onclick="buy_tickets()" class="btn btn-error mt-8 bg-activeButton border-0 text-white w-40 font-semibold lg:text-xl"><a href="#buyticket">Buy Tickets</a></button>
             </div>
           </div>
           <div class=" lg:absolute md:mt-10 lg:h-1 lg:left-80 items-center lg:flex justify-center inter gap-10 md:gap-y-40px">
@@ -121,34 +129,36 @@
             
           </div>
 
+          <!-- Best offers for you Coupon Code -->
           <section class="mt-60">
+            <!-- Best offers for you Coupon Code -->
               <div>
-                <h1 class="raleway text-center lg:font-bold text-4xl ">Best offers for you</h1>
+                <h1 class="raleway text-center lg:font-bold text-4xl">Best offers for you</h1>
               </div>
 
               <div class="grid-cols-2 gap-4  mt-14 flex w-full mx-auto  justify-center">
                 <div class="h-52 bg-yellow-300 w-[70vh] flex rounded-box items-center justify-center">
                         <div class="">
-                            <h1 class="font-bold text-3xl">15% OFF</h1>
+                            <h1 class="font-bold text-5xl">15% OFF</h1>
                             <h2 class="font-bold text-xl">on your next purchase</h2>
                             <p>use by January 2024</p>
                         </div>
                         <img src="images/cupon-devider.png" alt="">
                         <div class="">
-                            <h1 class="font-bold text-3xl">NEW15</h1>
+                            <h1 class="font-bold raleway text-3xl">NEW15</h1>
                             <p>Coupon Code</p>
                         </div>
                     </div> 
                     <div class="h-32 card bg-base-300 rounded-box items-center">
                         <div class="h-52 bg-indigo-200 w-[70vh] flex rounded-box items-center justify-center">
                             <div class="">
-                                <h1 class="font-bold text-3xl">20% OFF</h1>
+                                <h1 class="font-bold text-5xl">20% OFF</h1>
                                 <h2 class="font-bold text-xl">on your next purchase</h2>
                                 <p>use by January 2024</p>
                             </div>
                             <img src="images/cupon-devider.png" alt="">
                             <div class="">
-                                <h1 class="font-bold text-3xl">Couple 20</h1>
+                                <h1 class="font-bold raleway text-xl">Couple 20</h1>
                                 <p>Coupon Code</p>
                             </div>
                          </div> 
@@ -158,7 +168,7 @@
                   <button class="btn mt-14 btn-outline btn-warning">See All Offers</button>
               </div>
           </section>
-          <section class="mt-40 bg-buttons pt-10 rounded-tl-lg rounded-tr-lg mx-full h-auto">
+          <section id="buyticket" class="mt-40 bg-buttons pt-10 rounded-tl-lg rounded-tr-lg mx-full h-auto">
               <div class="mt-20">
                   <h1 class="md:text-2xl text-center lg:text-5xl text-black font-bold">P.H Paribahan</h1>
                   <p class="text-center mt-9">Yes, you can run unit tests and view the results directly within the app. The integrated<br>testing features allow for a streamlined .</p>
@@ -175,7 +185,7 @@
                             </div>
                         </div>
                         <div>
-                          <a class="btn font-bold col text-red-600  bg-red-100 btn-ghost"><img src="images/seat-green.png" alt="">40 Seats left</a>
+                          <a class="btn font-bold col text-red-600  bg-red-100 btn-ghost"><img src="images/seat-green.png" alt=""> <span id="seatLeft">40</span>Seats left</a>
                         </div>
                       </div>
                       <div class="bg-buttons w-full mt-10 rounded-2xl p-6 overflow-x-auto">
@@ -212,127 +222,127 @@
                  </div>
               </div>
 
-            <section class="mt-40 bg-cupnbgd pt-10 flex rounded-tl-lg rounded-tr-lg h-auto">
-                <div class="w-[672vh] ml-7 items-center justify-center">
+           <section class="mt-40 bg-cupnbgd pt-10 flex rounded-tl-lg rounded-tr-lg h-auto">
+                <div class="w-[600vh] ml-7 items-center justify-center">
                     <h1 class="text-2xl font-bold" >Select Your Seat</h1>
-                    <figure><img class="mt-6" src="images/Line.png" alt=""></figure>
+                    <figure><img class="mt-6" src="images/line.png" alt=""></figure>
                     <div class="flex flex-grow gap-96  mt-6">
                         <a class="flex font-bold text-neutral-900 gap-4"><img src="images/seat-gray.png" alt="">Available</a>
                         <a class=" flex font-bold text-red-600 gap-4 ml-6"><img src="images/seat-green.png" alt="">Selected</a>
                     </div>
-                    <figure><img class="mt-6" src="images/Line.png" alt=""></figure>
+                    <figure><img class="mt-6" src="images/line.png" alt=""></figure>
                     
                     <!-- seat key  -->
-                    <kbd class="kbd btn w-20 text-xl ml-[70vh] mt-16">A4</kbd>
+                    <div class="btn w-20 ml-[67vh] mt-16"><img src="images/tabler-icon-steering-wheel.png" alt=""></div>
                     <div class="flex gap-10 items-center justify-center">
                         <div class=" mt-6">
-                            <div class="mt-3">
-                                <kbd class="">A</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">A1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">A2</kbd>
+                            <div class="mt-3 key">
+                                <th class="">A</th>
+                                <kbd id="A1" onclick="seatbtn()" class="kbd seat btn w-20 text-xl ml-6">A1</kbd>
+                                <kbd id="A2" class="kbd seat btn w-20 text-xl ml-6">A2</kbd>
                             </div>
-                            <div  class="mt-6 ">
-                                <kbd class="">B</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">B1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">B2</kbd>
+                            <div  class="mt-6 key">
+                                <th class="">B</th>
+                                <kbd id="B1" class="kbd seat btn w-20 text-xl ml-6">B1</kbd>
+                                <kbd id="B2" class="kbd seat btn w-20 text-xl ml-6">B2</kbd>
                                 </div>
-                            <div  class="mt-6">
-                                <kbd class="">C</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">C1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">C2</kbd>
+                            <div  class="mt-6 key">
+                                <th class="">C</th>
+                                <kbd id="C1"class="kbd seat btn w-20 text-xl ml-6">C1</kbd>
+                                <kbd id="C2" class="kbd seat btn w-20 text-xl ml-6">C2</kbd>
                             </div>
-                            <div  class="mt-6">
-                                <kbd class="">D</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">D1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">D2</kbd>
+                            <div  class="mt-6 key">
+                                <th class="">D</th>
+                                <kbd id="D1" class="kbd seat btn w-20 text-xl ml-6">D1</kbd>
+                                <kbd id="D2" class="kbd seat btn w-20 text-xl ml-6">D2</kbd>
                             </div>
-                            <div  class="mt-6">
-                                <kbd class="">E</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">E1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">E2</kbd>
+                            <div  class="mt-6 key">
+                                <th class="">E</th>
+                                <kbd id="E1" class="kbd seat btn w-20 text-xl ml-6">E1</kbd>
+                                <kbd id="E2" class="kbd seat btn w-20 text-xl ml-6">E2</kbd>
                             </div>
-                            <div  class="mt-6">
-                                <kbd class="">F</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">F1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">F2</kbd>
+                            <div  class="mt-6 key">
+                                <th class="">F</th>
+                                <kbd id="F1" class="kbd seat btn w-20 text-xl ml-6">F1</kbd>
+                                <kbd id="F2" class="kbd seat btn w-20 text-xl ml-6">F2</kbd>
                             </div>
-                            <div  class="mt-6">
-                                <kbd class="">G</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">G1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">G2</kbd>
+                            <div  class="mt-6 key">
+                                <th class="">G</th>
+                                <kbd id="G1" class="kbd seat btn w-20 text-xl ml-6">G1</kbd>
+                                <kbd id="G2" class="kbd seat btn w-20 text-xl ml-6">G2</kbd>
                             </div>
-                            <div  class="mt-6">
-                                <kbd class="">H</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">H1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">H2</kbd>
+                            <div  class="mt-6 key">
+                                <th class="">H</th>
+                                <kbd id="H1" class="kbd seat btn w-20 text-xl ml-6">H1</kbd>
+                                <kbd id="H2" class="kbd seat btn w-20 text-xl ml-6">H2</kbd>
                             </div>
-                            <div  class="mt-6">
-                                <kbd class="">I</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">I1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">I2</kbd>
+                            <div  class="mt-6 key">
+                                <th class="">I</th>
+                                <kbd id="I1" class="kbd seat btn w-20 text-xl ml-6">I1</kbd>
+                                <kbd id="I2" class="kbd seat btn w-20 text-xl ml-6">I2</kbd>
                             </div>
-                            <div  class="mt-6">
-                                <kbd class="">J</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">J1</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">J2</kbd>
+                            <div  class="mt-6 key">
+                                <th class="">J</th>
+                                <kbd id="J1" class="kbd seat btn w-20 text-xl ml-6">J1</kbd>
+                                <kbd id="J2" class="kbd seat btn w-20 text-xl ml-6">J2</kbd>
                             </div>
                         </div>
                         <div class="mt-6">
-                            <div class="mt-3">
+                            <div class="mt-3 key">
                                
-                                <kbd class="kbd btn w-20 text-xl ml-6">A3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">A4</kbd>
+                                <kbd id="A3" class="kbd seat btn w-20 text-xl ml-6">A3</kbd>
+                                <kbd id="A4" class="kbd seat btn w-20 text-xl ml-6">A4</kbd>
                             </div>
-                            <div  class="mt-6 ">
+                            <div  class="mt-6 key">
                                
-                                <kbd class="kbd btn w-20 text-xl ml-6">B3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">B4</kbd>
+                                <kbd id="B3" class="kbd seat btn w-20 text-xl ml-6">B3</kbd>
+                                <kbd id="B4" class="kbd seat btn w-20 text-xl ml-6">B4</kbd>
                                 </div>
-                            <div  class="mt-6">
+                            <div  class="mt-6 key">
                                
-                                <kbd class="kbd btn w-20 text-xl ml-6">C3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">C4</kbd>
+                                <kbd id="C3" class="kbd seat btn w-20 text-xl ml-6">C3</kbd>
+                                <kbd id="C4" class="kbd seat btn w-20 text-xl ml-6">C4</kbd>
                             </div>
-                            <div  class="mt-6">
+                            <div  class="mt-6 key">
                                
-                                <kbd class="kbd btn w-20 text-xl ml-6">D3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">D4</kbd>
+                                <kbd id="D3" class="kbd seat btn w-20 text-xl ml-6">D3</kbd>
+                                <kbd id="D4" class="kbd seat btn w-20 text-xl ml-6">D4</kbd>
                             </div>
-                            <div  class="mt-6">
+                            <div  class="mt-6 key">
                                
-                                <kbd class="kbd btn w-20 text-xl ml-6">E3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">E4</kbd>
+                                <kbd id="E3" class="kbd seat btn w-20 text-xl ml-6">E3</kbd>
+                                <kbd id="E4" class="kbd seat btn w-20 text-xl ml-6">E4</kbd>
                             </div>
-                            <div  class="mt-6">
+                            <div  class="mt-6 key">
                                
-                                <kbd class="kbd btn w-20 text-xl ml-6">F3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">F4</kbd>
+                                <kbd id="F3" class="kbd seat btn w-20 text-xl ml-6">F3</kbd>
+                                <kbd id="F4" class="kbd seat btn w-20 text-xl ml-6">F4</kbd>
                             </div>
-                            <div  class="mt-6">
+                            <div  class="mt-6 key">
                                 
-                                <kbd class="kbd btn w-20 text-xl ml-6">G3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">G4</kbd>
+                                <kbd id="G3" class="kbd seat btn w-20 text-xl ml-6">G3</kbd>
+                                <kbd id="G4" class="kbd seat btn w-20 text-xl ml-6">G4</kbd>
                             </div>
-                            <div  class="mt-6">
+                            <div  class="mt-6 key">
                              
-                                <kbd class="kbd btn w-20 text-xl ml-6">H3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">H4</kbd>
+                                <kbd id="H3" class="kbd seat btn w-20 text-xl ml-6">H3</kbd>
+                                <kbd id="H4" class="kbd seat btn w-20 text-xl ml-6">H4</kbd>
                             </div>
-                            <div  class="mt-6">
+                            <div  class="mt-6 key">
                              
-                                <kbd class="kbd btn w-20 text-xl ml-6">I3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">I4</kbd>
+                                <kbd id="I3" class="kbd seat btn w-20 text-xl ml-6">I3</kbd>
+                                <kbd id="I4" class="kbd seat btn w-20 text-xl ml-6">I4</kbd>
                             </div>
-                            <div  class="mt-6">
+                            <div  class="mt-6 key">
                                 
-                                <kbd class="kbd btn w-20 text-xl ml-6">J3</kbd>
-                                <kbd class="kbd btn w-20 text-xl ml-6">J4</kbd>
+                                <kbd id="J3" class="kbd seat btn w-20 text-xl ml-6">J3</kbd>
+                                <kbd id="J4" class="kbd seat btn w-20 text-xl ml-6">J4</kbd>
                             </div>
                         </div>
                     </div>
                 </div>
-                <figure><img src="images/LineTwo.png" alt=""></figure>
-                <div class="w-[475vh] ml-7">
+                <figure><img class="mt-6 h-full" src="images/linetwo.png" alt=""></figure>
+                <div class="w-[480vh] ml-7">
                     <h1 class="text-2xl font-bold">Select Your Seat</h1>
                     <figure><img class="mt-6" src="images/Line.png" alt=""></figure>
                     <div class="overflow-x-auto mt-6 bg-buttons pl-4">
@@ -340,7 +350,7 @@
                           <!-- head -->
                           <thead>
                             <tr class="font-bold text-black text-xl">
-                              <th>Seat</th>
+                              <th>Seat<span id="seatcount" class="badge bg-activeButton text-white w-7 ml-3">2</span></th>
                               <th>Class</th>
                               <th>Price</th>
                             </tr>
@@ -348,27 +358,30 @@
                           <tbody>
                             <!-- row 1 -->
                             <tr class="font-medium text-black text-xl">
-                              <td>C2</td>
+                              <td id="seat-table">C2</td>
                               <td>Economoy</td>
-                              <td>0</td>
+                              <td id="seat-price">0</td>
                             </tr>
                             <!-- row 2 -->
-                            <tr class="font-medium text-black text-xl">
-                              <td>C2</td>
+                            <!-- <tr class="font-medium text-black text-xl">
+                              <td id="seat-table">C2</td>
                               <td>Economoy</td>
-                              <td>0</td>
+                              <td id="seat-price">0</td>
+                            </tr> -->
+                            <tr  id="table-container" class="font-medium text-black text-xl">
+                                
                             </tr>
                             <!-- row 3 -->
                             <tr class="font-bold text-black text-xl">
                               <td>Total Price</td>
                               <td></td>
-                              <td>BDT 00</td>
+                              <td id="totalprice">BDT 00</td>
                             </tr>
                           </tbody>
                         </table>
                         <label class=" input input-bordered flex items-center gap-2 mt-6 w-5/6 ml-10 justify-center p-8">
                             <input type="text" class="grow" placeholder="Have any copupon?" />
-                            <span class="btn btn-success">Apply</span>
+                            <span class="btn  bg-gray-300">Apply</span>
                           </label>
                           <div class="overflow-x-auto mt-6 bg-buttons">
                             <table class="table">
@@ -391,13 +404,14 @@
                         <div class="label">
                             <span class="label-text font-bold text-black text-xl">Phone Number*</span>
                           </div>
-                          <input type="text" placeholder="Enter phone number" class="input input-bordered w-full max-w-full" />
+                          <input type="number" placeholder="Enter phone number" class="input input-bordered w-full max-w-full" />
                           <div class="label">
                             <span class="label-text font-bold text-black text-xl">Email ID</span>
                           </div>
                           <input type="text" placeholder="Enter your email id" class="input input-bordered w-full max-w-full" />
                       </label>
-                      <button class="btn mt-6 w-full bg-activeButton text-white text-xl">Next</button>
+                      <button onclick="nextbtn()" class="btn mt-6 w-full bg-activeButton text-white text-xl">Next</button>
+                      
                       <div class="label mt-6">
                         <span class="label-text-alt text-2xl">Terms and Conditions</span>
                         <span class="label-text-alt text-2xl">Cancellation Policy</span>
@@ -406,6 +420,18 @@
 
                 </div>
             </section>
+          </section>
+        </section>
+
+          <section id="popupsection" class="hidden">
+            <div class="popup">
+                <img class="mx-auto" src="images/success.png" alt="">
+                <h1 class="text-3xl mt-5 font-bold text-red-900">SUCCESS</h1>
+                <p class="text-xl mt-6 font-semibold">Thank you for Booking Our Bus Seats. 
+                  We are working hard to find the best service and deals for you. </p>
+                  <p class="mt-6">Shortly you will find a confirmation in your email.</p>
+                  <button onclick="Continuebtn()" class="btn mt-6 btn-wide bg-SUCCESS text-white text-2xl">Continue</button>
+            </div>
           </section>
     </main>
     <footer class="footer inter p-10 mt-20 h-96 bg-neutral text-neutral-content items-center justify-center gap-96">
@@ -436,5 +462,7 @@
               </nav> 
             </nav>       
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
